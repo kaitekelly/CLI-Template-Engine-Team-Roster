@@ -15,72 +15,6 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 // ***prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
 
-// Employee is parent class
-  class Employee {
-    constructor(name) {
-      this.name = name;
-      this.email = email;
-    }
-
-    getName() {
-    }
-
-    getId() {
-    }
-
-    getEmail(){
-    }
-
-    getRole() {
-    }
-
-  }
-
-  class Manager {
-    constructor(officeNumber) {
-      this.officeNumber = officeNumber;
-    }
-
-    getRole() {
-      return Manager;
-    }
-
-  }
-
-  class Engineer {
-    constructor() {
-      //GitHub username
-      this.github = github;
-    }
-
-    getGitHub() {}
-
-    getRole() {
-      //Overridden to return 'Engineer' - how do you override something?
-      return Engineer;
-    }
-    
-  }
-
-  class Intern {
-    constructor {
-      this.school = school;
-    }
-
-    getSchool()
-
-    getRole(){
-      //overriden to return 'Intern'
-      return Intern;
-    }
-
-  }
-
-
-
-
-
-
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
@@ -95,8 +29,8 @@ const render = require("./lib/htmlRenderer");
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
 
-# Title:
-${data.title}
+// # Title:
+// ${data.title}
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
