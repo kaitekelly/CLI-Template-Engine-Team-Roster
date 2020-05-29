@@ -9,7 +9,9 @@ class Engineer extends Employee {
         this.github = github;
     }
 
-    getGitHub() {}
+    getGitHub() {
+        return this.github;
+    }
 
     getRole() {
         //Overridden to return 'Engineer' - how do you override something?

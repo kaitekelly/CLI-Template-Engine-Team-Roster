@@ -8,7 +8,7 @@ class Manager extends Employee {
     }
 
     getRole() {
-      return Manager;
+      return this.Manager;
     //   console.log("The manager is ${this.name}");
     }
 
