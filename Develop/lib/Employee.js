@@ -1,7 +1,7 @@
 // TODO: Write code to define and export the Employee class
 // Employee is parent class
 class Employee {
-    constructor(name) {
+    constructor(name, email) {
       this.name = name;
       this.email = email;
     }
@@ -16,6 +16,7 @@ class Employee {
     }
 
     getRole() {
+        return this.Employee;
     }
 
   }
