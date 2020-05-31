@@ -48,15 +48,15 @@ function questions() {
       name: "another",
       message: "Enter another team member?",
       default: false
-    }
-    
-    }).then(function {
-      let filename = outputPath(employees);
-      return render();
-      });
-      render();
-
-    }
+    })
+ }
+    // }).then(function {
+    //   let filename = outputPath(employees);
+    //   return render();
+    //   });
+    //   render();
+  }
+    // 
 
         //need to pass in an array of all employee objects inside render function 
 
@@ -91,4 +91,4 @@ function questions() {
       // and Intern classes should all extend from a class named Employee; see the directions
       // for further information. Be sure to test out each class and verify it generates an
       // object with the correct structure and methods. This structure will be crucial in order
-      // for the provided `render` function to work! ```
+      // for the provided `render` function to work! 

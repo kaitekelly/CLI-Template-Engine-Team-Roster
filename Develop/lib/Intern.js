@@ -8,13 +8,7 @@ class Intern extends Employee {
     }
 
     getSchool() {
-        return inquirer
-            // .prompt({
-            //     type: "input",
-            //     name: "school",
-            //     message: "What school do you attend?",
-            // })
-            // .then();
+        return " ";
     }
 
     getRole() {
