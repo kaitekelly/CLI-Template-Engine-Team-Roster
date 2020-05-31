@@ -14,7 +14,10 @@ class Manager extends Employee {
 
     getOffice() {
       // this.officeNumber = officeNumber;
-      return this.officeNumber.push(officeNumber);
+      // return this.officeNumber.push(officeNumber);
+      const officeNumber = 100;
+      const e = new Manager(name, id, email, officeNumber);
+      getOfficeNumber(e).toBe(officeNumber);
     }
 
  
