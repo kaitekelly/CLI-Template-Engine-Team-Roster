@@ -15,7 +15,7 @@ class Engineer extends Employee {
 
     getRole() {
         //Overridden to return 'Engineer' - how do you override something?
-        return this.Engineer;
+        return "Engineer";
     }
 
 }

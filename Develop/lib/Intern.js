@@ -9,17 +9,17 @@ class Intern extends Employee {
 
     getSchool() {
         return inquirer
-            .prompt({
-                type: "input",
-                name: "school",
-                message: "What school do you attend?",
-            })
-            .then();
+            // .prompt({
+            //     type: "input",
+            //     name: "school",
+            //     message: "What school do you attend?",
+            // })
+            // .then();
     }
 
     getRole() {
         //overriden to return 'Intern'
-        return this.Intern;
+        return "Intern";
     }
 }
 

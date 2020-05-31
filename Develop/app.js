@@ -15,53 +15,40 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 // ***prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
 
-function askRole() {
+const employeeData = async (employees = []) => {
+
+function questions() {
   inquirer.prompt({
-      type: "choice",
+      type: "list",
       name: "role",
-      message: "What is your role on the Dev team?",
-      choices: [Manager, Engineer, Intern],
+      message: "Enter employee's role:",
+      choices: ['Manager', 'Engineer', 'Intern'],
+    },
+    {
+      type: "input",
+      name: "name",
+      message: "Enter employee's name:"
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "Enter employee ID number: "
+    }, {
+      type: "input",
+      name: "email",
+      message: "Enter employee email address: "
+    }, {
+
+    }
     }).then(function ({
-        if (Manager === true)) {
-          return Manager;
-        } if (Engineer === true) {
-          return Engineer;
-        } if (Intern) {
-          return Intern;
-        }
+      let teamHtml = outputPath(data);
+      return render
       });
+      render();
 
-      function init() {
-        inquirer.prompt([{
-              type: "input",
-              name: "name",
-              message: "What is your name?"
-            },
-            {
-              type: "input",
-              name: "name",
-              message: "What is your name?"
-            },
-            {
-              type: "input",
-              name: "id",
-              message: "What is your employee id number?"
-            }, {
-              type: "input",
-              name: "email",
-              message: "What is your email address?"
-            }, {
+    }
 
-            }
-          ])
-          .then(function (data) {
-            let teamHtml = outputPath(data);
-            return render
-          })
         //need to pass in an array of all employee objects inside render function 
-        render();
-      }
-      init();
 
       // function writeToFile() {
       //   var teamHtml = 'team.html';
