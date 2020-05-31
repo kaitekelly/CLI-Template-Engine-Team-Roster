@@ -18,12 +18,7 @@ const render = require("./lib/htmlRenderer");
 const employeeData = async (employees = []) => {
 
 function questions() {
-  inquirer.prompt({
-      type: "list",
-      name: "role",
-      message: "Enter employee's role:",
-      choices: ['Manager', 'Engineer', 'Intern'],
-    },
+  inquirer.prompt(
     {
       type: "input",
       name: "name",
@@ -37,12 +32,27 @@ function questions() {
       type: "input",
       name: "email",
       message: "Enter employee email address: "
+    },
+    {
+      type: "list",
+      name: "role",
+      message: "Enter employee's role:",
+      choices: ['Manager', 'Engineer', 'Intern'],
     }, {
-
+      type: "input",
+      name: "school",
+      message: "Enter school intern attends: ",
+      when: (answers) => answers.role === 'Intern'
+    }, {
+      type: "confirm",
+      name: "another",
+      message: "Enter another team member?",
+      default: false
     }
-    }).then(function ({
-      let teamHtml = outputPath(data);
-      return render
+    
+    }).then(function {
+      let filename = outputPath(employees);
+      return render();
       });
       render();
 
