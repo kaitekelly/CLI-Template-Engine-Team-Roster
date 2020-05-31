@@ -5,16 +5,13 @@ class Intern extends Employee {
     constructor(school) {
         super(Intern, school);
         this.school = "UCLA";
-        // this.email = email;
     }
 
     getRole() {
-        //overriden to return 'Intern'
         return "Intern";
     }
 
     getSchool() {
-        //    this.school = Intern.school;
            return this.school;
         }
 }

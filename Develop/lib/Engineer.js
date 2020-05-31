@@ -3,19 +3,17 @@ const Employee = require("./Employee");
 
 
 class Engineer extends Employee {
-    constructor(GitHubUser) {
-        super(GitHubUser)
-        //GitHub username
-        this.GitHubUser = GitHubUser;
-    }
-
-    getGitHub() {
-        return this.GitHubUser;
+    constructor(name, id, email, github) {
+        super(name, id, email)
+        this.github = github;
     }
 
     getRole() {
-        //Overridden to return 'Engineer' - how do you override something?
         return "Engineer";
+    }
+
+    getGithub() {
+        return this.github;
     }
 
 }
