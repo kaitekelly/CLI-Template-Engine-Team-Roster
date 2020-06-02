@@ -19,7 +19,7 @@ const render = require("./lib/htmlRenderer");
 const employeeData = []
 
 function employeeQuestions() {
-  inquirer.prompt({
+  inquirer.prompt([{
       type: "input",
       name: "nameEmployee",
       message: "Enter employee's name:"
@@ -51,7 +51,7 @@ function employeeQuestions() {
       name: "another",
       message: "Enter another team member?",
       choices: ['Yes', 'No']
-    })
+    }])
 
 
     .then(function (response) {
@@ -68,6 +68,7 @@ function employeeQuestions() {
         employeeData(engineer);
       }
       if (response.another === true) {
+        //recurrsion is happening here, by calling function within a function
         employeeQuestions();
       } else {
         renderHtml();
@@ -82,7 +83,7 @@ function employeeQuestions() {
       } else {
         renderHtml();
       }
-      
+
 
     })
 }
@@ -97,13 +98,13 @@ employeeQuestions();
 
 //need to pass in an array of all employee objects inside render function 
 
-function writeToFile() {
-  var teamHtml = 'team.html';
-  fs.writeFile(); {
-    if (err) throw err;
-    console.log("Success!")
-  }
-}
+// function writeToFile(teamHtml, data) {
+//   let teamHtml = 'team.html';
+//   fs.writeFile(); {
+//     if (err) throw err;
+//     console.log("Success!")
+//   }
+// }
 
 // renderHtml(); {
 //   let html = render(employeeData);
