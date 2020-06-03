@@ -18,7 +18,7 @@ const render = require("./lib/htmlRenderer");
 
 const employeeData = []
 
-managerQuestions();
+// managerQuestions();
 let firsttime = true;
 
 function managerQuestions() {
@@ -33,7 +33,8 @@ function managerQuestions() {
       message: "Enter manager's office number:"
     }
   ])
-  employeeQuestions()
+  //then want the rest of the employee questions to generate
+  firstQuestion()
     .then(answers => {
       firsttime = false;
       switch (answers.action) {
@@ -59,12 +60,7 @@ function employeeQuestions() {
     type: "input",
     name: "emailEmployee",
     message: "Enter employee email address: "
-  }, {
-    type: "input",
-    name: "schoolIntern",
-    message: "Enter school intern attends: ",
-    when: (answers) => answers.role === 'Intern'
-  }, ])
+  }])
 }
 
 function engineerQuestions() {
@@ -79,85 +75,112 @@ function engineerQuestions() {
     name: "another",
     message: "Enter another team member?",
     choices: ['Yes', 'No']
-  }])
+  }]).then(answers => {
+    console.log("you entered engineer questions")
+  })
 }
 
-  //     .then(function (response) {
-  //       let employeeName = response.nameEmployee;
-  //       let employeeId = response.idEmployee;
-  //       let employeeEmail = response.emailEmployee;
-  //       let employeeRole = response.roleEmployee;
-  //       let internSchool = response.schoolIntern;
-  //       let engineerGithub = response.gitusernameEngineer;
-  //       console.log(employeeQuestions);
-  //       if (employeeRole === "Engineer") {
-  //         let engineer = new Engineer(employeeName, employeeId, employeeEmail, engineerGithub)
-  //         console.log(engineer);
-  //         employeeData(engineer);
-  //       }
-  //       if (response.another === true) {
-  //         //recurrsion is happening here, by calling function within a function
-  //         employeeQuestions();
-  //       } else {
-  //         renderHtml();
-  //       }
-  //       if (employeeRole === "Intern") {
-  //         let intern = new Intern(employeeName, employeeId, employeeEmail)
-  //         console.log(intern);
-  //         employeeData(intern);
-  //       } 
-  //       if (response.another === true) {
-  //         employeeQuestions();
-  //       } else {
-  //         renderHtml();
-  //       }
+function internQuestions() {
+  employeeQuestions();
+  inquirer.prompt({
+      type: "input",
+      name: "schoolIntern",
+      message: "Enter school intern attends: ",
+      when: (answers) => answers.role === 'Intern'
+    }, {
+      type: "confirm",
+      name: "another",
+      message: "Enter another team member?",
+      choices: ['Yes', 'No']
+    }
+    .then(function(data) {
+        if (answers.choices === 'Yes') {
+          firstQuestion();
+        } else {
+          renderHtml();
+        }
+      
+    })
+  )
+
+}
+
+//     .then(function (response) {
+//       let employeeName = response.nameEmployee;
+//       let employeeId = response.idEmployee;
+//       let employeeEmail = response.emailEmployee;
+//       let employeeRole = response.roleEmployee;
+//       let internSchool = response.schoolIntern;
+//       let engineerGithub = response.gitusernameEngineer;
+//       console.log(employeeQuestions);
+//       if (employeeRole === "Engineer") {
+//         let engineer = new Engineer(employeeName, employeeId, employeeEmail, engineerGithub)
+//         console.log(engineer);
+//         employeeData(engineer);
+//       }
+//       if (response.another === true) {
+//         //recurrsion is happening here, by calling function within a function
+//         employeeQuestions();
+//       } else {
+//         renderHtml();
+//       }
+//       if (employeeRole === "Intern") {
+//         let intern = new Intern(employeeName, employeeId, employeeEmail)
+//         console.log(intern);
+//         employeeData(intern);
+//       } 
+//       if (response.another === true) {
+//         employeeQuestions();
+//       } else {
+//         renderHtml();
+//       }
 
 
-  //     })
-  // }
-  // employeeQuestions();
-  // }).then(function {
-  //   let filename = outputPath(employees);
-  //   return render();
-  //   });
-  //   render();
-  // }
-  // 
+//     })
+// }
+// employeeQuestions();
+// }).then(function {
+//   let filename = outputPath(employees);
+//   return render();
+//   });
+//   render();
+// }
+// 
 
-  //need to pass in an array of all employee objects inside render function 
+//need to pass in an array of all employee objects inside render function 
 
-  // function writeToFile(teamHtml, data) {
-  //   let teamHtml = 'team.html';
-  //   fs.writeFile(); {
-  //     if (err) throw err;
-  //     console.log("Success!")
-  //   }
-  // }
+// function writeToFile(teamHtml, data) {
+//   let teamHtml = 'team.html';
+//   fs.writeFile(); {
+//     if (err) throw err;
+//     console.log("Success!")
+//   }
+// }
 
-  // renderHtml(); {
-  //   let html = render(employeeData);
-  //   return writeFileAsync(outputPath, html);
-  // }
+// renderHtml(); {
+//   let html = render(employeeData);
+//   return writeFileAsync(outputPath, html);
+// }
 
-  // After the user has input all employees desired, call the `render` function (required
-  // above) and pass in an array containing all employee objects; the `render` function will
-  // generate and return a block of HTML including templated divs for each employee!
+// After the user has input all employees desired, call the `render` function (required
+// above) and pass in an array containing all employee objects; the `render` function will
+// generate and return a block of HTML including templated divs for each employee!
 
-  // After you have your html, you're now ready to create an HTML file using the HTML
-  // returned from the `render` function. Now write it to a file named `team.html` in the
-  // `output` folder. You can use the variable `outputPath` above target this location.
-  // Hint: you may need to check if the `output` folder exists and create it if it
-  // does not.
+// After you have your html, you're now ready to create an HTML file using the HTML
+// returned from the `render` function. Now write it to a file named `team.html` in the
+// `output` folder. You can use the variable `outputPath` above target this location.
+// Hint: you may need to check if the `output` folder exists and create it if it
+// does not.
 
-  // HINT: each employee type (manager, engineer, or intern) has slightly different
-  // information; write your code to ask different questions via inquirer depending on
-  // employee type.
+// HINT: each employee type (manager, engineer, or intern) has slightly different
+// information; write your code to ask different questions via inquirer depending on
+// employee type.
 
-  // # Title:
-  // ${data.title}
+// # Title:
+// ${data.title}
 
-  // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-  // and Intern classes should all extend from a class named Employee; see the directions
-  // for further information. Be sure to test out each class and verify it generates an
-  // object with the correct structure and methods. This structure will be crucial in order
-  // for the provided `render` function to work! 
+// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
+// and Intern classes should all extend from a class named Employee; see the directions
+// for further information. Be sure to test out each class and verify it generates an
+// object with the correct structure and methods. This structure will be crucial in order
+// for the provided `render` function to work! 
