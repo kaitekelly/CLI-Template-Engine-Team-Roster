@@ -18,118 +18,146 @@ const render = require("./lib/htmlRenderer");
 
 const employeeData = []
 
-function employeeQuestions() {
+managerQuestions();
+let firsttime = true;
+
+function managerQuestions() {
   inquirer.prompt([{
-      type: "input",
-      name: "nameEmployee",
-      message: "Enter employee's name:"
-    }, {
-      type: "input",
-      name: "idEmployee",
-      message: "Enter employee ID number: "
-    }, {
-      type: "input",
-      name: "emailEmployee",
-      message: "Enter employee email address: "
-    }, {
       type: "list",
-      name: "roleEmployee",
-      message: "Enter employee's role:",
-      choices: ['Manager', 'Engineer', 'Intern'],
-    }, {
+      name: "nameManager",
+      message: "Enter Manager's name:"
+    },
+    {
       type: "input",
-      name: "schoolIntern",
-      message: "Enter school intern attends: ",
-      when: (answers) => answers.role === 'Intern'
-    }, {
-      type: "input",
-      name: "gitusernameEngineer",
-      message: "Enter employee's github username: ",
-      when: (answers) => answers.role === 'Engineer'
-    }, {
-      type: "confirm",
-      name: "another",
-      message: "Enter another team member?",
-      choices: ['Yes', 'No']
-    }])
-
-
-    .then(function (response) {
-      let employeeName = response.nameEmployee;
-      let employeeId = response.idEmployee;
-      let employeeEmail = response.emailEmployee;
-      let employeeRole = response.roleEmployee;
-      let internSchool = response.schoolIntern;
-      let engineerGithub = response.gitusernameEngineer;
-      console.log(employeeQuestions);
-      if (employeeRole === "Engineer") {
-        let engineer = new Engineer(employeeName, employeeId, employeeEmail, engineerGithub)
-        console.log(engineer);
-        employeeData(engineer);
+      name: "managerNumber",
+      message: "Enter manager's office number:"
+    }
+  ])
+  employeeQuestions()
+    .then(answers => {
+      firsttime = false;
+      switch (answers.action) {
+        case "Engineer":
+          engineerQuestions();
+          break;
+        case "Intern":
+          internQuestions()
       }
-      if (response.another === true) {
-        //recurrsion is happening here, by calling function within a function
-        employeeQuestions();
-      } else {
-        renderHtml();
-      }
-      if (employeeRole === "Intern") {
-        let intern = new Intern(employeeName, employeeId, employeeEmail)
-        console.log(intern);
-        employeeData(intern);
-      } 
-      if (response.another === true) {
-        employeeQuestions();
-      } else {
-        renderHtml();
-      }
-
-
     })
 }
-employeeQuestions();
-// }).then(function {
-//   let filename = outputPath(employees);
-//   return render();
-//   });
-//   render();
-// }
-// 
 
-//need to pass in an array of all employee objects inside render function 
+function employeeQuestions() {
+  inquirer.prompt([{
+    type: "input",
+    name: "nameEmployee",
+    message: "Enter employee's name:"
+  }, {
+    type: "input",
+    name: "idEmployee",
+    message: "Enter employee ID number: "
+  }, {
+    type: "input",
+    name: "emailEmployee",
+    message: "Enter employee email address: "
+  }, {
+    type: "input",
+    name: "schoolIntern",
+    message: "Enter school intern attends: ",
+    when: (answers) => answers.role === 'Intern'
+  }, ])
+}
 
-// function writeToFile(teamHtml, data) {
-//   let teamHtml = 'team.html';
-//   fs.writeFile(); {
-//     if (err) throw err;
-//     console.log("Success!")
-//   }
-// }
+function engineerQuestions() {
+  employeeQuestions();
+  inquirer.prompt([{
+    type: "input",
+    name: "gitusernameEngineer",
+    message: "Enter employee's github username: ",
+    when: (answers) => answers.role === 'Engineer'
+  }, {
+    type: "confirm",
+    name: "another",
+    message: "Enter another team member?",
+    choices: ['Yes', 'No']
+  }])
+}
 
-// renderHtml(); {
-//   let html = render(employeeData);
-//   return writeFileAsync(outputPath, html);
-// }
+  //     .then(function (response) {
+  //       let employeeName = response.nameEmployee;
+  //       let employeeId = response.idEmployee;
+  //       let employeeEmail = response.emailEmployee;
+  //       let employeeRole = response.roleEmployee;
+  //       let internSchool = response.schoolIntern;
+  //       let engineerGithub = response.gitusernameEngineer;
+  //       console.log(employeeQuestions);
+  //       if (employeeRole === "Engineer") {
+  //         let engineer = new Engineer(employeeName, employeeId, employeeEmail, engineerGithub)
+  //         console.log(engineer);
+  //         employeeData(engineer);
+  //       }
+  //       if (response.another === true) {
+  //         //recurrsion is happening here, by calling function within a function
+  //         employeeQuestions();
+  //       } else {
+  //         renderHtml();
+  //       }
+  //       if (employeeRole === "Intern") {
+  //         let intern = new Intern(employeeName, employeeId, employeeEmail)
+  //         console.log(intern);
+  //         employeeData(intern);
+  //       } 
+  //       if (response.another === true) {
+  //         employeeQuestions();
+  //       } else {
+  //         renderHtml();
+  //       }
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
 
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
+  //     })
+  // }
+  // employeeQuestions();
+  // }).then(function {
+  //   let filename = outputPath(employees);
+  //   return render();
+  //   });
+  //   render();
+  // }
+  // 
 
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
+  //need to pass in an array of all employee objects inside render function 
 
-// # Title:
-// ${data.title}
+  // function writeToFile(teamHtml, data) {
+  //   let teamHtml = 'team.html';
+  //   fs.writeFile(); {
+  //     if (err) throw err;
+  //     console.log("Success!")
+  //   }
+  // }
 
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! 
+  // renderHtml(); {
+  //   let html = render(employeeData);
+  //   return writeFileAsync(outputPath, html);
+  // }
+
+  // After the user has input all employees desired, call the `render` function (required
+  // above) and pass in an array containing all employee objects; the `render` function will
+  // generate and return a block of HTML including templated divs for each employee!
+
+  // After you have your html, you're now ready to create an HTML file using the HTML
+  // returned from the `render` function. Now write it to a file named `team.html` in the
+  // `output` folder. You can use the variable `outputPath` above target this location.
+  // Hint: you may need to check if the `output` folder exists and create it if it
+  // does not.
+
+  // HINT: each employee type (manager, engineer, or intern) has slightly different
+  // information; write your code to ask different questions via inquirer depending on
+  // employee type.
+
+  // # Title:
+  // ${data.title}
+
+  // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
+  // and Intern classes should all extend from a class named Employee; see the directions
+  // for further information. Be sure to test out each class and verify it generates an
+  // object with the correct structure and methods. This structure will be crucial in order
+  // for the provided `render` function to work! 
