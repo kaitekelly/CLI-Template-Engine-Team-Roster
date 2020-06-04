@@ -30,7 +30,6 @@ function startQuestions() {
       name: "emailEmployee",
       message: "Enter employee email address: "
     },
-    //this question needs to be manager specific
     {
       type: "list",
       name: "employeeRole",
