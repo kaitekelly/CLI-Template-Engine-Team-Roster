@@ -10,7 +10,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const employeeData = []
+const employees = []
 
 startQuestions();
 
@@ -29,7 +29,7 @@ function startQuestions() {
       type: "input",
       name: "emailEmployee",
       message: "Enter employee email address: "
-    }, 
+    },
     //this question needs to be manager specific
     {
       type: "input",
@@ -61,7 +61,9 @@ function startQuestions() {
       case "Intern":
         internQuestions()
     }
-    // renderHtml();
+    let manager = new manager(data);
+    manager.push(employees);
+    render();
   })
 }
 
@@ -101,7 +103,9 @@ function engineerQuestions() {
       case "Intern":
         internQuestions()
     }
-    // renderHtml();
+    let engineer = new engineer;
+    engineer.push(employees)
+    render();
   })
 }
 
@@ -124,39 +128,49 @@ function internQuestions() {
       message: "Enter school intern attends: ",
       // when: (answers) => answers.role === 'Intern'
     }, {
-      type: "confirm",
+      type: "list",
       name: "another",
-      message: "Enter another team member?",
-      choices: ['Yes', 'No']
+      message: "Would you like to enter another employee?",
+      choices: [
+        "Engineer",
+        "Intern",
+        "No"
+      ]
     }])
     .then(function (data) {
-      if (data.choices === 'Yes') {
-        startQuestions();
-      } else {
-        renderHtml();
+      switch (data.another) {
+        case "Engineer":
+          engineerQuestions();
+          break;
+        case "Intern":
+          internQuestions();
+        case "No":
+          // render();
       }
 
     })
 }
 
-// function employeeQuestions() {
-//   inquirer.prompt([{
-//     type: "input",
-//     name: "nameEmployee",
-//     message: "Enter employee's name:"
-//   }, {
-//     type: "input",
-//     name: "idEmployee",
-//     message: "Enter employee ID number: "
-//   }, {
-//     type: "input",
-//     name: "emailEmployee",
-//     message: "Enter employee email address: "
-//   }]).then(function (data) {
-//     console.log("you were asked employee questions")
-//   })
-// }
+ // For each element in animal
+ employees.forEach(function(data) {
+  if (data.employeeRole === "Manager") {
+    manager.push(data);
+  } else if (data.another === "Engineer") {
+    engineer.push(data);
+  } else (data.another === "Intern") 
+    intern.push(data);
+  
+});
 
+function writeToFile(fileName, data) {
+  var fileName = 'team.html';
+  fs.writeFile(fileName, data, "utf-8", function(err) {
+    if (err) throw err;
+    console.log("Success!");
+  });
+}
+//data is the answers to the questions
+//teamHtml is team.htmal the document in the output folder
 
 
 //     .then(function (response) {
@@ -177,7 +191,7 @@ function internQuestions() {
 //         //recurrsion is happening here, by calling function within a function
 //         employeeQuestions();
 //       } else {
-//         renderHtml();
+//         render();
 //       }
 //       if (employeeRole === "Intern") {
 //         let intern = new Intern(employeeName, employeeId, employeeEmail)
@@ -187,7 +201,7 @@ function internQuestions() {
 //       if (response.another === true) {
 //         employeeQuestions();
 //       } else {
-//         renderHtml();
+//         render();
 //       }
 
 
@@ -204,15 +218,9 @@ function internQuestions() {
 
 //need to pass in an array of all employee objects inside render function 
 
-// function writeToFile(teamHtml, data) {
-//   let teamHtml = 'team.html';
-//   fs.writeFile(); {
-//     if (err) throw err;
-//     console.log("Success!")
-//   }
-// }
 
-// renderHtml(); {
+
+// render(data); {
 //   let html = render(employeeData);
 //   return writeFileAsync(outputPath, html);
 // }
