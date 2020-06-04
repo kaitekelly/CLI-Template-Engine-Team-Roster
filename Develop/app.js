@@ -11,19 +11,32 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 // ***prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
 
 const employeeData = []
+// function init() {
+  managerQuestions();
 
-// managerQuestions();
-let firsttime = true;
-
+// }
+// init();
+let addEmployee = true;
 function managerQuestions() {
   inquirer.prompt([{
-      type: "list",
+    type: "input",
+    name: "nameEmployee",
+    message: "Enter employee's name:"
+  }, {
+    type: "input",
+    name: "idEmployee",
+    message: "Enter employee ID number: "
+  }, {
+    type: "input",
+    name: "emailEmployee",
+    message: "Enter employee email address: "
+  },{
+      type: "input",
       name: "nameManager",
       message: "Enter Manager's name:"
     },
@@ -33,11 +46,13 @@ function managerQuestions() {
       message: "Enter manager's office number:"
     }
   ])
+  
   //then want the rest of the employee questions to generate
-  firstQuestion()
-    .then(answers => {
-      firsttime = false;
-      switch (answers.action) {
+  // firstQuestion()
+    .then(function(data) {
+      console.log(data);
+      addEmployee = true;
+      switch (data.another) {
         case "Engineer":
           engineerQuestions();
           break;
@@ -60,7 +75,9 @@ function employeeQuestions() {
     type: "input",
     name: "emailEmployee",
     message: "Enter employee email address: "
-  }])
+  }]).then(function (data) {
+    console.log("you were asked employee questions")
+  })
 }
 
 function engineerQuestions() {
@@ -69,7 +86,7 @@ function engineerQuestions() {
     type: "input",
     name: "gitusernameEngineer",
     message: "Enter employee's github username: ",
-    when: (answers) => answers.role === 'Engineer'
+    // when: (answers) => answers.role === 'Engineer'
   }, {
     type: "confirm",
     name: "another",
@@ -86,7 +103,7 @@ function internQuestions() {
       type: "input",
       name: "schoolIntern",
       message: "Enter school intern attends: ",
-      when: (answers) => answers.role === 'Intern'
+      // when: (answers) => answers.role === 'Intern'
     }, {
       type: "confirm",
       name: "another",
@@ -94,7 +111,8 @@ function internQuestions() {
       choices: ['Yes', 'No']
     }
     .then(function(data) {
-        if (answers.choices === 'Yes') {
+
+        if (data.choices === 'Yes') {
           firstQuestion();
         } else {
           renderHtml();
@@ -106,11 +124,12 @@ function internQuestions() {
 }
 
 //     .then(function (response) {
+  // let internSchool = data.schoolIntern;
+
 //       let employeeName = response.nameEmployee;
 //       let employeeId = response.idEmployee;
 //       let employeeEmail = response.emailEmployee;
 //       let employeeRole = response.roleEmployee;
-//       let internSchool = response.schoolIntern;
 //       let engineerGithub = response.gitusernameEngineer;
 //       console.log(employeeQuestions);
 //       if (employeeRole === "Engineer") {
