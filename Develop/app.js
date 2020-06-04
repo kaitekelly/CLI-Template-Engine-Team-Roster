@@ -10,59 +10,62 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-// ***prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
-
 const employeeData = []
-// function init() {
-  managerQuestions();
 
-// }
-// init();
+startQuestions();
+
 let addEmployee = true;
-function managerQuestions() {
+
+function startQuestions() {
   inquirer.prompt([{
-    type: "input",
-    name: "nameEmployee",
-    message: "Enter employee's name:"
-  }, {
-    type: "input",
-    name: "idEmployee",
-    message: "Enter employee ID number: "
-  }, {
-    type: "input",
-    name: "emailEmployee",
-    message: "Enter employee email address: "
-  },{
       type: "input",
-      name: "nameManager",
-      message: "Enter Manager's name:"
+      name: "nameEmployee",
+      message: "Enter employee's name:"
+    }, {
+      type: "input",
+      name: "idEmployee",
+      message: "Enter employee ID number: "
+    }, {
+      type: "input",
+      name: "emailEmployee",
+      message: "Enter employee email address: "
+    }, 
+    //this question needs to be manager specific
+    {
+      type: "input",
+      name: "employeeRole",
+      message: "Enter Employees role:"
     },
     {
       type: "input",
       name: "managerNumber",
-      message: "Enter manager's office number:"
+      message: "Enter office number:"
+    },
+    {
+      type: "list",
+      name: "another",
+      message: "Would you like to enter another employee?",
+      choices: [
+        "Engineer",
+        "Intern",
+        "No"
+      ]
     }
-  ])
-  
-  //then want the rest of the employee questions to generate
-  // firstQuestion()
-    .then(function(data) {
-      console.log(data);
-      addEmployee = true;
-      switch (data.another) {
-        case "Engineer":
-          engineerQuestions();
-          break;
-        case "Intern":
-          internQuestions()
-      }
-    })
+  ]).then(function (data) {
+    console.log(data);
+    addEmployee = true;
+    switch (data.another) {
+      case "Engineer":
+        engineerQuestions();
+        break;
+      case "Intern":
+        internQuestions()
+    }
+    // renderHtml();
+  })
 }
 
-function employeeQuestions() {
+function engineerQuestions() {
   inquirer.prompt([{
     type: "input",
     name: "nameEmployee",
@@ -75,31 +78,47 @@ function employeeQuestions() {
     type: "input",
     name: "emailEmployee",
     message: "Enter employee email address: "
-  }]).then(function (data) {
-    console.log("you were asked employee questions")
-  })
-}
-
-function engineerQuestions() {
-  employeeQuestions();
-  inquirer.prompt([{
+  }, {
     type: "input",
     name: "gitusernameEngineer",
     message: "Enter employee's github username: ",
     // when: (answers) => answers.role === 'Engineer'
   }, {
-    type: "confirm",
+    type: "list",
     name: "another",
-    message: "Enter another team member?",
-    choices: ['Yes', 'No']
-  }]).then(answers => {
-    console.log("you entered engineer questions")
+    message: "Would you like to enter another employee?",
+    choices: [
+      "Engineer",
+      "Intern",
+      "No"
+    ]
+  }]).then(function (data) {
+    console.log("you entered engineer questions");
+    switch (data.another) {
+      case "Engineer":
+        engineerQuestions();
+        break;
+      case "Intern":
+        internQuestions()
+    }
+    // renderHtml();
   })
 }
 
 function internQuestions() {
-  employeeQuestions();
-  inquirer.prompt({
+  inquirer.prompt([{
+      type: "input",
+      name: "nameEmployee",
+      message: "Enter employee's name:"
+    }, {
+      type: "input",
+      name: "idEmployee",
+      message: "Enter employee ID number: "
+    }, {
+      type: "input",
+      name: "emailEmployee",
+      message: "Enter employee email address: "
+    }, {
       type: "input",
       name: "schoolIntern",
       message: "Enter school intern attends: ",
@@ -109,22 +128,39 @@ function internQuestions() {
       name: "another",
       message: "Enter another team member?",
       choices: ['Yes', 'No']
-    }
-    .then(function(data) {
+    }])
+    .then(function (data) {
+      if (data.choices === 'Yes') {
+        startQuestions();
+      } else {
+        renderHtml();
+      }
 
-        if (data.choices === 'Yes') {
-          firstQuestion();
-        } else {
-          renderHtml();
-        }
-      
     })
-  )
-
 }
 
+// function employeeQuestions() {
+//   inquirer.prompt([{
+//     type: "input",
+//     name: "nameEmployee",
+//     message: "Enter employee's name:"
+//   }, {
+//     type: "input",
+//     name: "idEmployee",
+//     message: "Enter employee ID number: "
+//   }, {
+//     type: "input",
+//     name: "emailEmployee",
+//     message: "Enter employee email address: "
+//   }]).then(function (data) {
+//     console.log("you were asked employee questions")
+//   })
+// }
+
+
+
 //     .then(function (response) {
-  // let internSchool = data.schoolIntern;
+// let internSchool = data.schoolIntern;
 
 //       let employeeName = response.nameEmployee;
 //       let employeeId = response.idEmployee;
