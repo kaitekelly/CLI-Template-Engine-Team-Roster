@@ -10,7 +10,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const employees = []
+const employees = [];
 
 startQuestions();
 
@@ -32,9 +32,12 @@ function startQuestions() {
     },
     //this question needs to be manager specific
     {
-      type: "input",
+      type: "list",
       name: "employeeRole",
-      message: "Enter Employees role:"
+      message: "Enter Employees role:",
+      choices: [
+        "Manager",
+      ]
     },
     {
       type: "input",
@@ -52,18 +55,18 @@ function startQuestions() {
       ]
     }
   ]).then(function (data) {
-    console.log(data);
-    addEmployee = true;
+    let manager = new Manager(data.nameEmployee, data.idEmployee, data.emailEmployee, data.managerNumber);
+    employees.push(manager);
+
     switch (data.another) {
       case "Engineer":
         engineerQuestions();
         break;
       case "Intern":
-        internQuestions()
+        internQuestions();
+      default:
+        renderHtml();
     }
-    let manager = new manager(data);
-    manager.push(employees);
-    render();
   })
 }
 
@@ -95,17 +98,17 @@ function engineerQuestions() {
       "No"
     ]
   }]).then(function (data) {
-    console.log("you entered engineer questions");
+    let engineer = new Engineer(data.nameEmployee, data.idEmployee, data.emailEmployee, data.gitusernameEngineer)
+    employees.push(engineer);
     switch (data.another) {
       case "Engineer":
         engineerQuestions();
         break;
       case "Intern":
-        internQuestions()
+        internQuestions();
+      default:
+        renderHtml();
     }
-    let engineer = new engineer;
-    engineer.push(employees)
-    render();
   })
 }
 
@@ -138,96 +141,28 @@ function internQuestions() {
       ]
     }])
     .then(function (data) {
+      let intern = new Intern(data.nameEmployee, data.idEmployee, data.emailEmployee, data.schoolIntern)
+      employees.push(intern);
       switch (data.another) {
         case "Engineer":
           engineerQuestions();
-          break;
         case "Intern":
           internQuestions();
-        case "No":
-          // render();
+        default:
+          renderHtml();
       }
 
     })
 }
-
- // For each element in animal
- employees.forEach(function(data) {
-  if (data.employeeRole === "Manager") {
-    manager.push(data);
-  } else if (data.another === "Engineer") {
-    engineer.push(data);
-  } else (data.another === "Intern") 
-    intern.push(data);
-  
-});
-
-function writeToFile(fileName, data) {
-  var fileName = 'team.html';
-  fs.writeFile(fileName, data, "utf-8", function(err) {
-    if (err) throw err;
-    console.log("Success!");
-  });
-}
-//data is the answers to the questions
-//teamHtml is team.htmal the document in the output folder
-
-
-//     .then(function (response) {
-// let internSchool = data.schoolIntern;
-
-//       let employeeName = response.nameEmployee;
-//       let employeeId = response.idEmployee;
-//       let employeeEmail = response.emailEmployee;
-//       let employeeRole = response.roleEmployee;
-//       let engineerGithub = response.gitusernameEngineer;
-//       console.log(employeeQuestions);
-//       if (employeeRole === "Engineer") {
-//         let engineer = new Engineer(employeeName, employeeId, employeeEmail, engineerGithub)
-//         console.log(engineer);
-//         employeeData(engineer);
-//       }
-//       if (response.another === true) {
-//         //recurrsion is happening here, by calling function within a function
-//         employeeQuestions();
-//       } else {
-//         render();
-//       }
-//       if (employeeRole === "Intern") {
-//         let intern = new Intern(employeeName, employeeId, employeeEmail)
-//         console.log(intern);
-//         employeeData(intern);
-//       } 
-//       if (response.another === true) {
-//         employeeQuestions();
-//       } else {
-//         render();
-//       }
-
-
-//     })
-// }
-// employeeQuestions();
-// }).then(function {
-//   let filename = outputPath(employees);
-//   return render();
-//   });
-//   render();
-// }
-// 
-
-//need to pass in an array of all employee objects inside render function 
-
-
-
-// render(data); {
-//   let html = render(employeeData);
-//   return writeFileAsync(outputPath, html);
-// }
-
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
+function renderHtml() {
+  fs.writeFileSync(outputPath, render(employees), "utf-8")
+}
+
+// const OUTPUT_DIR = path.resolve(__dirname, "output");
+// const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
@@ -238,9 +173,6 @@ function writeToFile(fileName, data) {
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
 // employee type.
-
-// # Title:
-// ${data.title}
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
