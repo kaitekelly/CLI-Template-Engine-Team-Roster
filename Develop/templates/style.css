@@ -1,5 +1,48 @@
+body {
+    background-color: #F2FDFF;
+}
+
+.team-heading {
+    background-color: #101935;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: #C4B7CB;
+    font-size: 72px;
+    margin: 0px
+}
+
+.employee-card {
+    margin: 10pt;
+    /* width: 800pt; */
+    
+}
+/* .card {
+    /* margin: 10pt; */
+/* }  */
+
+/* .d-flex {
+    width: 600pt;
+} */
+
+.card-header {
+background-color: #E7EBEE;
+}
+
 h2 {
     font-family: 'Montserrat', sans-serif;
-    background-color: #FBF5F3;
-    color: red;
+font-size: 18pt;
+    color:  #101935;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16pt;
+
+}
+
+li {
+    font-family: 'Montserrat', sans-serif;
+
 }
