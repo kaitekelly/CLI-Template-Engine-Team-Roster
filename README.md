@@ -30,7 +30,7 @@ Screenshot of CLI - Team - Roster
 ![Screen Shot 2020-06-04 at 8 08 51 PM](https://user-images.githubusercontent.com/61023907/83833592-2d68a680-a6a1-11ea-89ce-86ffe48d61ff.png)
 
 
-# Contribute: 
+# Contributions: 
 Contributor, Kait Kelly. View github profile through badge above. 
 Npms used: Node.js, NPM's Inquirer, Path, FileSystem. HTML, Javascript, CSS, Google Font's api
 
