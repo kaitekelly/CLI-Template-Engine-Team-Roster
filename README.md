@@ -26,7 +26,7 @@ In the command line of the working directory, type "npm install", "npm inquirer"
 # Usage: 
 To use this command line team roster generator, a team manager can answer command line questions to generate an html page with team members name, employee id, email, and other relevant info. 
 
-Screenshot of CLI - Team - Roster
+# Screenshot of application in use:
 ![Screen Shot 2020-06-04 at 8 08 51 PM](https://user-images.githubusercontent.com/61023907/83833592-2d68a680-a6a1-11ea-89ce-86ffe48d61ff.png)
 
 
