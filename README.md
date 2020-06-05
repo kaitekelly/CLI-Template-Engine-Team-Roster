@@ -6,10 +6,10 @@ A command line interface to generate a team roster with individual employee info
 <!-- ![alt text](https://github.com/kaitekelly.png) -->
 
 # Username: 
-kaitekelly
+kaitekelly 👩🏻‍💻
 
 # Title:
-CLI-Template-Engine-Team-Roster
+CLI-Template-Engine-Team-Roster 💻
 
 # Link to Repo:
 https://github.com/kaitekelly/CLI-Template-Engine-Team-Roster
@@ -21,7 +21,7 @@ This is an orgizational team application for a manager to track their team membe
 n/a
 
 # Installation: 
-In the command line of the working directory, type "npm install", "npm inquirer", "npm util", "npm fs".
+💾 In the command line of the working directory, type "npm install", "npm inquirer", "npm util", "npm fs".
 
 # Usage: 
 To use this command line team roster generator, a team manager can answer command line questions to generate an html page with team members name, employee id, email, and other relevant info. 
@@ -44,5 +44,5 @@ Node.js tests for Classes and constructors have been written for this app. All o
 ISC
 
 # Link to video of application in use: 
-https://drive.google.com/file/d/1pLqcsBdVXPKg74XMLM74FPH-fgR8WeFq/view
+🎬 https://drive.google.com/file/d/1pLqcsBdVXPKg74XMLM74FPH-fgR8WeFq/view
 
