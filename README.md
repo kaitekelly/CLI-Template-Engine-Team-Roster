@@ -3,7 +3,7 @@ A command line interface to generate a team roster with individual employee info
 
 <a href="https://github.com/kaitekelly"><img src="https://img.shields.io/badge/Github%20page-kaitekelly-1abc9c.svg" alt="User's github profile"></a>
 
-![alt text](https://github.com/kaitekelly.png)
+<!-- ![alt text](https://github.com/kaitekelly.png) -->
 
 # Username: 
 kaitekelly
