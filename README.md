@@ -29,6 +29,9 @@ To use this command line team roster generator, a team manager can answer comman
 # Screenshot of application in use:
 ![Screen Shot 2020-06-04 at 8 08 51 PM](https://user-images.githubusercontent.com/61023907/83833592-2d68a680-a6a1-11ea-89ce-86ffe48d61ff.png)
 
+<img width="1662" alt="Screen Shot 2020-06-04 at 9 43 21 PM" src="https://user-images.githubusercontent.com/61023907/83838048-02844f80-a6ad-11ea-9515-acf7f869640e.png">
+
+
 
 # Contributions: 
 Contributor, Kait Kelly. View github profile through badge above. 
