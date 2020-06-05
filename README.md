@@ -40,3 +40,6 @@ Node.js tests for Classes and constructors have been written for this app. All o
 # License: 
 ISC
 
+# Link to video of application in use: 
+https://drive.google.com/file/d/1pLqcsBdVXPKg74XMLM74FPH-fgR8WeFq/view
+
